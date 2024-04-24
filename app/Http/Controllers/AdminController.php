@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Shop;
+use App\Models\Event;
 
 class AdminController extends Controller
 {
@@ -36,5 +37,16 @@ class AdminController extends Controller
          $user->save();
       }
       return redirect()->route('pages.admin.users')->with('shopStatus','Shop Status Updated');
+   }
+
+   public function eventActivity($id){
+      $user = User::find($id);
+      $event = Event::where('user_id', '=', $user->id)->get();
+      return view("pages.admin.event-activity", compact("user", "event"));
+   }
+   public function destroyEventActivity($id){
+      $event = Event::findOrFail($id);
+      $event->delete();
+      return redirect()->back()->with('EventActivityDeleted', ' Deleted successfully');
    }
 }

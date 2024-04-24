@@ -15,9 +15,9 @@
             <div>
 
                 @if (auth()->user()->is_shop_approved)
-                    <a href="{{ route('pages.user.my-shops') }}">My Shops</a>
+                    <a href="{{ route('pages.user.my-shops') }}">My Shops</a><br>
                 @endif
-
+                <a href="{{ route('pages.user.my-events') }}">My Events</a>
 
             </div>
         </div>

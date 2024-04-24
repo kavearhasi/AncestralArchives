@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\EventController;
 use Doctrine\DBAL\Logging\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -43,19 +44,20 @@ Route::group(['middleware' => 'prevent-back-button'], function () {
         Route::get('/gallery', function () {
             return view('pages.gallery');
         })->name('gallery');
-        Route::get('/event', function () {
-            return view('pages.event');
-        })->name('events');
+        
         Route::get('/contact', function () {
             return view('pages.contact');
         })->name('contacts');
         Route::get('/user/dashboard', function () {
             return view('pages.user-pages.dashboard');
         })->name('dashboard');
+        Route::get('/event', [EventController::class,'index'])->name('events');
+        Route::post('/event/search', [EventController::class, 'search'])->name('event-search');
         Route::get('/allShops', [ShopController::class, 'allShops'])->name('shops');
         Route::get('/Shops/single/{id}', [ShopController::class, 'shopSingle'])->name('shops-single');
         Route::post('/Shops/search', [ShopController::class, 'Shopsearch'])->name('shop-search');
         Route::prefix('/user')->name('user.')->group(function () {
+            //Shops ROutes
             Route::get('/my-shops', [ShopController::class, 'showMyShops'])->name('my-shops');
             Route::get('/add-shops/form', [ShopController::class, 'addshop'])->name('add-shop');
             Route::post('/add-shops/save', [ShopController::class, 'storeShop'])->name('store-shop');
@@ -65,13 +67,23 @@ Route::group(['middleware' => 'prevent-back-button'], function () {
             Route::get('/edit-items/{id}', [ProductController::class, 'editItemShow'])->name('edit-items');
             Route::post('/add-item', [ProductController::class, 'addItem'])->name('add-item');
             Route::get('/delete-item/{shopId}/{id}', [ProductController::class, 'destroyItem'])->name('destroy-item');
-            Route::get('/training', [ShopController::class, 'AddTraining'])->name('add-training');
+            
+            // Events Routes
+            Route::get('/my-events', [EventController::class, 'ShowMyEvents'])->name('my-events');
+            Route::get('/add-events/form', [EventController::class, 'create'])->name('add-events');
+            Route::post('/add-shops/save', [EventController::class, 'store'])->name('store-event');
+            Route::get('/edit/event/{id}',[EventController::class,'edit'])->name('edit-event');
+            Route::post('/update/event/{id}',[EventController::class,'update'])->name('update-event');
+            Route::get('/delete/event/{id}',[EventController::class,'destroy'])->name('destroy-event');
         });
         Route::prefix('/admin')->name('admin.')->group(function () {
             Route::get('/users', [AdminController::class, 'index'])->name('users');
             Route::get('/shop/activity/{id}', [AdminController::class, 'shopActivity'])->name('shop-activity');
             Route::get('/delete/shop/activity/{id}', [AdminController::class, 'destroyShopActivity'])->name('destroy-shop-activity');
             Route::get('/shop/approval/{status}/{id}', [AdminController::class, 'shopApproval'])->name('shop-approval');
+            Route::get('/event/activity/{id}', [AdminController::class, 'eventActivity'])->name('event-activity');
+            Route::get('/delete/event/activity/{id}', [AdminController::class, 'destroyEventActivity'])->name('destroy-event-activity');
+            
         });
     });
     //------------------------------------------------------------------------------------------------

@@ -7,11 +7,12 @@
                 <li class="breadcrumb-item active"><a href="#">User Shop</a></li>
             </ol>
         </div>
-       
         @if (!$shop->count())
             <h1 class="text-center m-5 text-danger"> No shops were created</h1>
         @else
-           
+            @if (Session::has('shopActivityDeleted'))
+                <x-pages.alert alertType="danger" message="{{ Session::get('shopActivityDeleted') }}"></x-pages.alert>
+            @endif
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -19,7 +20,6 @@
                         <th>Shop Name</th>
                         <th>Info</th>
                         <th>Delete</th>
-                        
                     </tr>
                 </thead>
                 @php
@@ -29,10 +29,11 @@
                     <tr>
                         <td> {{ $i++ }} </td>
                         <td>{{ $item->name }}</td>
-                        <td><a href="#" class="btn btn-primary">Info</a></td>
+                        <td><a href="{{ route('pages.shops-single', ['id' => $item->id]) }}"
+                                class="btn btn-primary">Info</a>
+                        </td>
                         <td><a href="{{ route('pages.admin.destroy-shop-activity', ['id' => $item->id]) }}"
                                 class="btn btn-primary">Delete</a></td>
-                                
                     </tr>
                 @endforeach
                 </tbody>

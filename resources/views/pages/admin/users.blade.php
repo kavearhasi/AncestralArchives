@@ -38,7 +38,7 @@
                             <td><a href="{{ route('pages.admin.shop-activity', ['id' => $item->id]) }}"
                                     class="btn btn-primary">View Shops</a></td>
                             <td><a href="#" class="btn btn-primary">View Blogs</a></td>
-                            <td><a href="#" class="btn btn-primary">View Events</a></td>
+                            <td><a href="{{ route('pages.admin.event-activity', ['id' => $item->id]) }}" class="btn btn-primary">View Events</a></td>
                             <td>
                                 @if (!$item->is_shop_approved)
                                     <a href="{{route('pages.admin.shop-approval',['status'=>true,'id'=>$item->id])}}" type="button" class="btn btn-primary" data-mdb-ripple-init>Approve
