@@ -13,6 +13,9 @@
             @if (Session::has('shopActivityDeleted'))
                 <x-pages.alert alertType="danger" message="{{ Session::get('shopActivityDeleted') }}"></x-pages.alert>
             @endif
+            @if (Session::has('shopSingleApproved'))
+                <x-pages.alert alertType="info" message="{{ Session::get('shopSingleApproved') }}"></x-pages.alert>
+            @endif
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -20,6 +23,7 @@
                         <th>Shop Name</th>
                         <th>Info</th>
                         <th>Delete</th>
+                        <th>Approval</th>
                     </tr>
                 </thead>
                 @php
@@ -34,6 +38,17 @@
                         </td>
                         <td><a href="{{ route('pages.admin.destroy-shop-activity', ['id' => $item->id]) }}"
                                 class="btn btn-primary">Delete</a></td>
+                        <td>
+                            @if ($item->shop_approved_status == 0)
+                            <a href="{{ route('pages.admin.approve-shop', ['id' => $item->id, 'status' => 1]) }}"
+                                class="btn btn-primary">Approve</a>
+                            @else
+                            <a href="{{ route('pages.admin.approve-shop', ['id' => $item->id, 'status' => 0]) }}"
+                                class="btn btn-primary">Disapprove</a>
+                            @endif
+                            
+                            
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

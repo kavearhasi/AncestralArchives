@@ -32,6 +32,7 @@ class ShopController extends Controller
     public function storeShop(AddShopValidationRequest $request)
     {
         $formData = $request->all();
+        $formData['shop_approved_status'] = 0;
         if (!empty($formData['shop_image'])) {
             $fileName = time() . '-' . $request->file('shop_image')->getClientOriginalName();
             $path = $request->file('shop_image')->storeAs('shop-images', $fileName, 'public');
@@ -86,7 +87,15 @@ class ShopController extends Controller
     {
         $allShops = Shop::all();
         $allProducts = Product::all();
-        return view('pages.shops', compact('allShops', 'allProducts'));
+        $shopDisapproved= [];
+        foreach($allShops as $item){
+            if(!$item->shop_approved_status ){
+                $shopDisapproved[] = $item->id; 
+            }
+
+        }
+        
+        return view('pages.shops', compact('allShops', 'allProducts','shopDisapproved'));
     }
     public function shopSingle($id)
     {
@@ -118,7 +127,14 @@ class ShopController extends Controller
                     ->orWhere('description', 'like', "%$search%");
             })->get();
            $allShops  = $shops;
-        } else {
+        }
+        elseif($search != null && $filter == 'location'){
+            $shops = Shop::where(function ($query) use ($search) {
+                $query->where('address', 'like', "%$search%");
+            })->get();
+           $allShops  = $shops;
+        }
+        else {
             $product = Product::where(function ($query) use ($search) {
                 $query->where('product_name', 'like', "%$search%")
                     ->orWhere('product_description', 'like', "%$search%");
@@ -129,11 +145,18 @@ class ShopController extends Controller
             })->get();
             $allShops = $shop;
             $allProducts = $product;
-
+            
             
         }
-       
+        $shopDisapproved= [];
+        foreach($allShops as $item){
+            if(!$item->shop_approved_status ){
+                $shopDisapproved[] = $item->id; 
+            }
+
+        }
+
         
-       return view('pages.shops', compact('allShops', 'allProducts'));
+       return view('pages.shops', compact('allShops', 'allProducts','shopDisapproved'));
     }
 }

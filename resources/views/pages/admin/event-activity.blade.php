@@ -13,6 +13,9 @@
             @if (Session::has('EventActivityDeleted'))
                 <x-pages.alert alertType="danger" message="{{ Session::get('EventActivityDeleted') }}"></x-pages.alert>
             @endif
+            @if (Session::has('eventSingleApproved'))
+            <x-pages.alert alertType="info" message="{{ Session::get('eventSingleApproved') }}"></x-pages.alert>
+        @endif
             <div class="row">
                 @foreach ($event as $item)
                     <div class="col-md-4 d-flex ftco-animate">
@@ -47,8 +50,19 @@
                                 <p>{{ $item->event_description }}</p>
                                 <div class="flex row  ">
                                     
-                                    <a href="{{ route('pages.admin.destroy-event-activity', ['id' => $item->id]) }}">Delete Event
-                                        <i class="icon icon-remove"></i></a>
+                                    <a href="{{ route('pages.admin.destroy-event-activity', ['id' => $item->id]) }}" class="mx-2">Delete Event
+                                        <i class="icon icon-remove"></i></a> 
+                                        <span class="mx-2">|</span>
+                                        @if ($item->event_approved_status == 0)
+                                        <a href="{{ route('pages.admin.approve-event', ['id' => $item->id, 'status' => 1]) }}}" class="mx-2">Approve 
+                                            <i class="icon icon-ticket"></i></a>
+                                            
+                                        @else
+                                        <a href="{{ route('pages.admin.approve-event', ['id' => $item->id, 'status' => 0]) }}" class="mx-2">Disapprove 
+                                            <i class="icon icon-ticket"></i></a>
+                                        @endif
+                                      
+                                            
                                 </div>
                             </div>
                         </div>

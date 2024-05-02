@@ -10,15 +10,20 @@
                 <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link">Home</a></li>
                 @if (Route::has('login'))
                     @auth
-                        <li class="nav-item"><a href="{{route('pages.shops')}}" class="nav-link">Shops</a></li>
+                        <li class="nav-item"><a href="{{ route('pages.shops') }}" class="nav-link">Shops</a></li>
                         <li class="nav-item"><a href="{{ route('pages.blogs') }}" class="nav-link">Blog</a></li>
                         <li class="nav-item"><a href="{{ route('pages.events') }}" class="nav-link">Events</a></li>
-                       
+
                         @role('admin')
-                            <li class="nav-item"><a href="{{route('pages.admin.users')}}" class="nav-link">Admin Pannel</a></li>
+                            <li class="nav-item"><a href="{{ route('pages.admin.users') }}" class="nav-link">Admin Pannel</a>
+                            </li>
                         @else
                             <li class="nav-item"><a href="{{ route('pages.dashboard') }}" class="nav-link">Dashboard</a></li>
                         @endrole
+                        @hasallroles('user|admin')
+                        <li class="nav-item"><a href="{{ route('pages.dashboard') }}" class="nav-link">Dashboard</a></li>
+                        
+                        @endhasallroles
                         <li class="nav-item"><a href="{{ url('/forum') }}" class="nav-link">Forum</a></li>
                         <li class="nav-item mt-2 pl-3">
                             <form method="POST" action="{{ route('logout') }}">

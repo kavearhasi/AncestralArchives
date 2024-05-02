@@ -45,6 +45,7 @@ class EventController extends Controller
     public function store(AddEventValidationRequest $request)
     {
         $formData = $request->all();
+        $formData['event_approved_status'] = 0 ;
         $formData['event_time'] = $request->input('hour') . ':' . $request->input('minutes') . ':' . $request->input('meridian');
         if (!empty($formData['event_banner'])) {
             $fileName = time() . '-' . $request->file('event_banner')->getClientOriginalName();

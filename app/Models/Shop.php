@@ -22,6 +22,7 @@ class Shop extends Model
         'email',
         'items',
         'license_number',
+        'shop_approved_status',
         'type'
     ];
     protected $casts = [

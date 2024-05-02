@@ -17,7 +17,8 @@ class Event extends Model
         'event_banner',
         'event_date',
         'event_time',
-        'event_location'
+        'event_location',
+        'event_approved_status'
     ];
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

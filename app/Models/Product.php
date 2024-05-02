@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Product extends Model
 {
     use HasFactory,SoftDeletes;
@@ -14,7 +15,7 @@ class Product extends Model
     protected $guarded = [];
 
  
-    public function shops(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function shops()
     {
         return $this->belongsTo(Shop::class);
     }

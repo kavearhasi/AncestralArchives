@@ -25,9 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //  $role = Role::create(['name' => 'admin']);
+       
+         //$role = Role::create(['name' => 'super-admin']);
         //  $permission = Permission::create(['name' => 'approve shop']);
-        // $role = Role::create(['name' => 'user']);
+        //$role = Role::create(['name' => 'user']);
        
 
 

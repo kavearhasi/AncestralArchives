@@ -18,6 +18,7 @@
                                                 <option value="product&shop" default>Product & Shop</option>
                                                 <option value="product">Product</option>
                                                 <option value="shop">Shop</option>
+                                                <option value="location">Location</option>
                                                </select>
                                 </div>
                             </form>
@@ -25,6 +26,12 @@
                         @if ( $allProducts != null)
                         
                             @foreach ($allProducts as $item)
+                           
+                              @if ( !in_array( $item->shop_id, $shopDisapproved ))
+                                  
+                             
+                               
+                           
                                 <div class="col-md-4 ftco-animate">
                                     <div class="cause-entry">
                                         <a href="#" class="img"
@@ -38,15 +45,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                 
+                                @endif
                             @endforeach
                         @endif
                 </div>
                 <hr>
                 <h1 class="text-center">Our Shops</h1>
                 @if ($allShops != null)
-                
+               
+                                
                     @foreach ($allShops as $item)
+                    @if ( !in_array( $item->id, $shopDisapproved ))
+                   
                         <div class="card m-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $item->name }}</h5>
@@ -56,7 +66,7 @@
                             </div>
                         </div>
 
-                        
+                      @endif
                         
                     @endforeach
                 @endif

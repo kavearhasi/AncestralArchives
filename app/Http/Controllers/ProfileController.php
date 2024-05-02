@@ -17,9 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        // $userid = auth()->user()->getAuthIdentifier();
-        //  $user =  User::findOrFail($userid);
-        //  $user->assignRole('user');
+        
         return view('profile.edit', [
             'user' => $request->user(),
         ]);

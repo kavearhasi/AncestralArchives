@@ -27,6 +27,9 @@
                                 </div>
             <div class="row">
                 @foreach ($events as $item)
+                @if ($item->event_approved_status)
+                    
+               
                     <div class="col-md-4 d-flex ftco-animate">
                         <div class="blog-entry align-self-stretch">
                             <a href="#" class="block-20"
@@ -60,12 +63,14 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endforeach
             </div>
             <hr id="upcoming_events">
             <h1 class="text-center">Upcoming Events</h1>
             <div class="row">
                 @foreach ($upcomingEvents as $item)
+                @if ($item->event_approved_status)
                     <div class="col-md-4 d-flex ftco-animate">
                         <div class="blog-entry align-self-stretch">
                             <a href="#" class="block-20"
@@ -100,6 +105,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 @endforeach
             </div>
             <div class="text-center m-5">

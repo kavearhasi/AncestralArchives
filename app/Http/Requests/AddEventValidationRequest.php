@@ -21,7 +21,7 @@ class AddEventValidationRequest extends FormRequest
     {
         return [
             'event_name' => 'required|string',
-            'event_description' => 'required|between:20,100',
+            'event_description' => 'required',
             'event_banner' => 'nullable',
             'event_date' => 'nullable|after:today',
             'event_time' => 'nullable',

@@ -15,10 +15,15 @@
                         <li class="nav-item"><a href="{{route('pages.events')}}" class="nav-link">Events</a></li>
                        
                         @role('admin')
-                            <li class="nav-item"><a href="{{route('pages.admin.users')}}" class="nav-link">Admin Pannel</a></li>
-                        @else
-                            <li class="nav-item"><a href="{{ route('pages.dashboard') }}" class="nav-link">Dashboard</a></li>
-                        @endrole
+                        <li class="nav-item"><a href="{{ route('pages.admin.users') }}" class="nav-link">Admin Pannel</a>
+                        </li>
+                    @else
+                        <li class="nav-item"><a href="{{ route('pages.dashboard') }}" class="nav-link">Dashboard</a></li>
+                    @endrole
+                    @hasallroles('user|admin')
+                    <li class="nav-item"><a href="{{ route('pages.dashboard') }}" class="nav-link">Dashboard</a></li>
+                    
+                    @endhasallroles
                         <li class="nav-item"><a href="{{url('/forum')}}" class="nav-link">Forum</a></li>
 
                         <li class="nav-item  mt-3 pl-3">

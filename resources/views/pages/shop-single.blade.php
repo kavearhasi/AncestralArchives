@@ -8,7 +8,10 @@
         </x-pages.banner>
     @endif
     <div class="container">
+       
+      
         <div class="staff mb-2">
+            
             <marquee>To order Product contact the owners .The details are mentioned in shop Info</marquee>
             <ul class="nav nav-pills card-header-pills">
                 <li class="nav-item">

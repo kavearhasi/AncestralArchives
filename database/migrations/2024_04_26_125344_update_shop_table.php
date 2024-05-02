@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('shops', function (Blueprint $table) {
+
+           $table->boolean('shop_approved_status');   
+        });
     }
 
     /**

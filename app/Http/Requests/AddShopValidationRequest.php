@@ -29,9 +29,8 @@ class AddShopValidationRequest extends FormRequest
             'address' => 'required',
             'description' => 'required',
             'shop_image' => 'nullable|image',
-            'license_number'=> 'nullable|numeric',
-            'items' => 'required'
-
+            'license_number'=> 'nullable|numeric'
+            
         ];
     }
 }
