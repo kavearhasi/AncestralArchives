@@ -32,7 +32,7 @@
                         <label>Event Date </label>
                         <div class="form-group">
                             <input type="date" class="form-control" value="{{$event->event_date}}" name="event_date"
-                                placeholder="Event  Date (required)">
+                                placeholder="Event  Date ">
                         </div>
                         <label>Event Time</label>
                         <div class="row">
@@ -40,7 +40,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="hours">Hours</label>
-                                        <select class="form-control" name="hour"required>
+                                        <select class="form-control" name="hour">
                                             <option selected value="{{$time[0]}}">{{$time[0]}} </option>
                                             <option value="1"> 1 </option>
                                             <option value="2"> 2 </option>

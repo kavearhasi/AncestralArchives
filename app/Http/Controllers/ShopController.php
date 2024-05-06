@@ -148,14 +148,17 @@ class ShopController extends Controller
             
             
         }
+       
+
         $shopDisapproved= [];
+        if($allShops != null){
         foreach($allShops as $item){
             if(!$item->shop_approved_status ){
                 $shopDisapproved[] = $item->id; 
             }
 
         }
-
+    }
         
        return view('pages.shops', compact('allShops', 'allProducts','shopDisapproved'));
     }
