@@ -44,7 +44,7 @@
                 @php
                     $recentBlog ++;
                 @endphp
-                    @if ($item->blog_approved_status && $recentBlog <6)
+                    @if ($item->blog_approved_status && $recentBlog <4)
                         <div class="col-md-4 d-flex ftco-animate">
                             <div class="blog-entry align-self-stretch">
                                 <a href="#" class="block-20"
@@ -86,7 +86,7 @@
                 @php
                 $recentEvent ++;
             @endphp
-                @if ($item->event_approved_status && $recentEvent <6)
+                @if ($item->event_approved_status && $recentEvent <4)
                     
                
                     <div class="col-md-4 d-flex ftco-animate">
